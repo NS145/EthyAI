@@ -14,7 +14,7 @@ import AnalysisModules, { Brain, Eye, Globe, Layers } from "@/components/Analysi
 import ThemeToggle from "@/components/ThemeToggle";
 import ResearchAgent from "@/components/ResearchAgent";
 import { useAuth } from "@/hooks/useAuth";
-import { submitFeedback } from "@/services/api";
+import { submitFeedback, analyzeContent, AnalysisInput } from "@/services/api";
 
 type InputType = "text" | "image" | "video";
 
@@ -53,16 +53,11 @@ const runAnalysis = async (
     onModulesUpdate([...modules]);
   };
 
-  // Stage 1: Text Analysis (real AI)
+  // Stage 1: Text Analysis (FastAPI Backend)
   updateModule(0, { status: "running" });
   let aiResult: any;
   try {
-    const { data, error } = await supabase.functions.invoke("analyze-text", {
-      body: { text: content },
-    });
-    if (error) throw error;
-    if (data?.error) throw new Error(data.error);
-    aiResult = data;
+    aiResult = await analyzeContent({ type: "text", content });
   } catch (err: any) {
     toast.error(err.message || "AI analysis failed");
     throw err;
@@ -86,17 +81,10 @@ const runAnalysis = async (
 
   return {
     score: aiResult.score,
-    label: aiResult.summary,
-    highlights: (aiResult.indicators || []).map((ind: any) => ({ word: ind.text, weight: ind.weight })),
-    shapValues: (aiResult.features || []).map((f: any) => ({ feature: f.name, value: f.value })),
-    evidence: (aiResult.evidence || []).map((e: any) => ({
-      title: e.title,
-      source: e.source,
-      url: e.url,
-      similarity: e.similarity,
-      verdict: e.verdict as "supports" | "contradicts" | "neutral",
-      timestamp: "Just now",
-    })),
+    label: aiResult.label,
+    highlights: aiResult.highlights || [],
+    shapValues: aiResult.shapValues || [],
+    evidence: aiResult.evidence || [],
     modules,
   };
 };
