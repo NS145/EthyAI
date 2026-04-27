@@ -2,7 +2,7 @@
 FastAPI Main Application
 
 Layer 5: API + HITL Integration
-Serves the REST API for the TruthLense frontend.
+Serves the REST API for the EthyAI frontend.
 """
 
 from fastapi import FastAPI
@@ -17,16 +17,16 @@ from app.routes.dashboard import router as dashboard_router
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifecycle - warm up models on startup."""
-    print("🔬 TruthLense Backend starting...")
+    print("[*] EthyAI Backend starting...")
     print(f"   CORS origins: {settings.cors_origins_list}")
     print(f"   GPU enabled: {settings.use_gpu}")
     # Models are lazy-loaded on first request to keep startup fast
     yield
-    print("🔬 TruthLense Backend shutting down...")
+    print("[*] EthyAI Backend shutting down...")
 
 
 app = FastAPI(
-    title="TruthLense API",
+    title="EthyAI API",
     description="Ethical AI System for Digital Misinformation Detection with Multimodal Explainability",
     version="2.1.0",
     lifespan=lifespan,
@@ -49,7 +49,7 @@ app.include_router(dashboard_router)
 @app.get("/")
 async def root():
     return {
-        "service": "TruthLense API",
+        "service": "EthyAI API",
         "version": "2.1.0",
         "status": "online",
         "endpoints": {

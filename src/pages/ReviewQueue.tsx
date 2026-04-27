@@ -106,7 +106,7 @@ const ReviewQueue = () => {
               <ArrowLeft className="w-5 h-5" />
             </Button>
             <div className="flex items-center gap-2">
-              <img src="/logo.png" alt="TruthLense" className="w-8 h-8 object-contain" />
+              <img src="/logo.png" alt="EthyAI" className="w-8 h-8 object-contain" />
               <div>
                 <h1 className="font-display text-xl font-bold text-foreground tracking-tight">
                   Review Queue

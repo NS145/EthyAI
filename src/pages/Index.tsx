@@ -150,7 +150,7 @@ const Index = () => {
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src="/logo.png" alt="TruthLense Logo" className="w-8 h-8 object-contain" />
+            <img src="/logo.png" alt="EthyAI Logo" className="w-8 h-8 object-contain" />
             <div>
               <h1 className="font-display text-xl font-bold text-foreground tracking-tight">
                 Truth<span className="text-gradient">Lense</span>

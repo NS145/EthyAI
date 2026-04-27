@@ -2,7 +2,7 @@
  * Auth Page - Login/Signup
  *
  * Handles Supabase authentication with email/password.
- * Matches the TruthLense design system.
+ * Matches the EthyAI design system.
  */
 
 import { useState } from "react";
@@ -55,7 +55,7 @@ const Auth = () => {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <img src="/logo.png" alt="TruthLense" className="w-12 h-12 object-contain" />
+            <img src="/logo.png" alt="EthyAI" className="w-12 h-12 object-contain" />
           </div>
           <h1 className="font-display text-3xl font-bold text-foreground tracking-tight">
             Truth<span className="text-gradient">Lense</span>
