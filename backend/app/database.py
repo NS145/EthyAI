@@ -1,0 +1,17 @@
+"""
+Supabase database client for server-side operations.
+Uses the service role key for full access.
+"""
+
+from supabase import create_client, Client
+from app.config import settings
+
+_client: Client | None = None
+
+
+def get_supabase() -> Client:
+    """Get or create Supabase client with service role credentials."""
+    global _client
+    if _client is None:
+        _client = create_client(settings.supabase_url, settings.supabase_service_key)
+    return _client

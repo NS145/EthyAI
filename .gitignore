@@ -1,0 +1,8 @@
+﻿node_modules/
+venv/
+__pycache__/
+*.pt
+*.bin
+.env
+node_modules
+node_modules
